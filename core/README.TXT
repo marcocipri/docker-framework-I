@@ -1,0 +1,3 @@
+create_core_vms
+deploy_consul
+set_consul_env
