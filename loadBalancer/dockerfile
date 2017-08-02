@@ -1,0 +1,21 @@
+FROM haproxy
+
+RUN apt-get update && \
+    apt-get install -y wget curl unzip 
+RUN wget https://releases.hashicorp.com/consul-template/0.19.0/consul-template_0.19.0_linux_amd64.zip 
+RUN unzip consul-template_0.19.0_linux_amd64.zip
+RUN chmod a+x consul-template
+RUN mv consul-template /usr/bin/consul-template
+RUN chmod u+x /usr/bin/consul-template
+# Install app dependencies
+ADD haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+ADD consul.hcl /usr/local/etc/consul/consul.hcl
+ADD in.tpl /usr/local/etc/consul/in.tpl
+ADD haproxy.template /usr/local/etc/consul/haproxy.template
+ADD hap.sh /hap.sh
+ADD startup.sh /startup.sh
+RUN chmod u+x /*.sh
+
+EXPOSE 8080:80
+
+CMD ["/startup.sh"]
