@@ -7,5 +7,6 @@ while [  $COUNTER -eq 0 ]; do
     rest=${RESPONSE#*$searchstring}
     ##echo ${rest}
     mod=${rest//[:\}\"]/}
-    echo ${mod}
+    thisDate=$(date)
+    echo ${thisDate} ${mod}
 done
