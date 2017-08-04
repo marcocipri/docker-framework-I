@@ -16,8 +16,8 @@ echo ${LOAD_BALANCER}
   docker run -d \
     --net=host \
     -e 'CONSUL_ALLOW_PRIVILEGED_PORTS=' \
-    --hostname consul-client-${1} \
-    --name consul-client-${1} \
+    --hostname consul-lb-${1} \
+    --name consul-lb-${1} \
     --env "SERVICE_IGNORE=true" \
     --env "CONSUL_CLIENT_INTERFACE=eth0" \
     --env "CONSUL_BIND_INTERFACE=eth1" \
